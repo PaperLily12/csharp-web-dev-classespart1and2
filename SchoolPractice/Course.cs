@@ -12,9 +12,17 @@ namespace SchoolPractice
 
         // TODO: Add your custom 'ToString' method here. Make sure it returns a well-formatted string rather than
         //  just the class fields.
-
+        public override string ToString()
+        {
+            return $"{Topic}, led by instructor {Instructor}, with a class size of {enrolledStudents.Count}";
+        }
 
         // TODO: Add your custom 'Equals' method here. Consider which fields should match in order to call two
         //  Course objects equal.
+        public override bool Equals(object obj)
+        {
+            Course course = obj as Course;
+            return course.Topic == Topic && course.Instructor == Instructor;
+        }
     }
 }

@@ -31,20 +31,48 @@ namespace SchoolPractice
         public void AddGrade(int courseCredits, double grade)
         {
             // Update the appropriate properties: NumberOfCredits, Gpa
+            double totalQualityScore = Gpa * NumberOfCredits;
+            totalQualityScore += courseCredits * grade;
+            NumberOfCredits += courseCredits;
+            Gpa = totalQualityScore / NumberOfCredits;
         }
 
         //TODO: Complete the GetGradeLevel method here:
         public string GetGradeLevel(int credits)
         {
             // Determine the grade level of the student based on NumberOfCredits
-            return "grade level tbd";
+            if (credits < 0)
+            {
+                return "Invalid input";
+            }
+            if (credits <= 29)
+            {
+                return "Freshman";
+            }
+            if (credits <= 59)
+            {
+                return "Sophomore";
+            }
+            if (credits <= 89)
+            {
+                return "Junior";
+            }
+            return "Senior";
         }
 
         // TODO: Add your custom 'ToString' method here. Make sure it returns a well-formatted string rather
         //  than just the class fields.
+        public override string ToString()
+        {
+            return $"{Name}, {GetGradeLevel(NumberOfCredits)}, ID: {StudentId}, Credits: {NumberOfCredits}, GPA: {Gpa}";
+        }
 
         // TODO: Add your custom 'Equals' method here. Consider which fields should match in order to call two
         //  Student objects equal.
-
+        public override bool Equals(object obj)
+        {
+            Student student = obj as Student;
+            return StudentId == student.StudentId;
+        }
     }
 }
